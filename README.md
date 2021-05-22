@@ -7,7 +7,7 @@ Right now you can use `npm` to build and run the app. `Node.js` is needed to com
 # Build
 `npm build`
 
-#Run
+# Run
 `npm run`
 
 Created by Shafil Alam
