@@ -2,7 +2,7 @@
   "name": "chung-miner",
   "productName": "chung-miner",
   "version": "1.0.0",
-  "description": "My Electron application description",
+  "description": "Easy to use Chunguscoin Miner",
   "main": "src/index.js",
   "scripts": {
     "start": "electron-forge start",
