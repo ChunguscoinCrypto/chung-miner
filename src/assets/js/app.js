@@ -2,7 +2,6 @@ const { dialog } = require('electron').remote;
 const shell = require('electron').shell;
 const path = require('path');
 
-
 window.addEventListener("load", () => {
     // Show home screen, but hide mining screen when page is loaded
     getHome().style.display = "block";
@@ -27,7 +26,7 @@ function showMiner() {
     getHome().style.display = "none";
     getMine().style.display = "block";
 
-    getMine().innerHTML += `\n Welcome Chung User, ${address}!`;
+    // getMine().innerHTML += `\n Welcome Chung User, ${address}!`;
 }
 
 function showAddrError() { 

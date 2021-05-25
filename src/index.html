@@ -19,7 +19,7 @@
     <div class="uk-container">
       <div class="uk-card uk-card-default uk-card-large uk-card-body">
         <h3 class="uk-card-title">
-          <span uk-icon="icon: move; ratio: 2"></span> 
+          <span uk-icon="icon: move; ratio: 2"></span>
           Welcome to Chung Miner!
         </h3>
         <p>Please enter your Chunguscoin address to get started.</p>
@@ -27,15 +27,47 @@
           <div class="uk-inline">
             <span class="uk-form-icon" uk-icon="icon: user"></span>
             <input class="uk-input" type="text" placeholder="Chunguscoin address" id="chung-address">
-          </div>  
-          <button onclick="showMiner()" class="uk-button uk-button-primary" id="chung-start">Let's Start!</button> 
-        </div> 
+          </div>
+          <button onclick="showMiner()" class="uk-button uk-button-primary" id="chung-start">Let's Start!</button>
+        </div>
       </div>
     </div>
   </div>
 
   <div id="mine-screen">
-    <div class="uk-container">
+    <div id="mine-main">
+
+      <div class="uk-card uk-card-default uk-card-body">
+        <div class="uk-child-width-1-2" uk-grid>
+          <div>
+            <div class="uk-card uk-card-default uk-card-body">Item</div>
+          </div>
+          <div>
+            <div class="uk-child-width-1-2" uk-grid>
+              <div>
+                <div class="uk-card uk-card-primary uk-card-body">Item</div>
+              </div>
+              <div>
+                <div class="uk-card uk-card-primary uk-card-body">Item</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="uk-card uk-card-default uk-card-body">
+        <div class="uk-child-width-expand@s" uk-grid>
+          <div>
+            <div class="uk-card uk-card-default uk-card-body">Item</div>
+          </div>
+          <div>
+            <div class="uk-card uk-card-default uk-card-body">Item</div>
+          </div>
+          <div>
+            <div class="uk-card uk-card-default uk-card-body">Item</div>
+          </div>
+        </div>
+      </div>
 
     </div>
   </div>
