@@ -4,10 +4,7 @@ body {
   padding: 0;
   height: 100%;
   width: 100%;
-}
-
-:root {
-  --mine-top-height: 30px;
+  overflow: hidden;
 }
 
 .bar-icon {
@@ -63,8 +60,15 @@ code {
 }
 
 .mine-chart {
-  width: 100%;
-  top: var(--mine-top-height);
+  position: relative;
+  margin: auto;
+  width: 50vh;
+  height: 580px;
+  margin-top: 120px;
+}
+
+#chart {
+  /* height: 580px !important; */
 }
 
 .mine-buttom {

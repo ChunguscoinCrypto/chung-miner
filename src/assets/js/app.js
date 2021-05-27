@@ -2,6 +2,7 @@ const { dialog } = require('electron').remote;
 const shell = require('electron').shell;
 const osu = require('node-os-utils');
 const si = require('systeminformation');
+const chart = require('chart.js');
 const path = require('path');
 const os = require('os');
 
@@ -32,6 +33,7 @@ function showMiner() {
     getMine().querySelector("#mine-top-info").innerHTML = `Mining to ${address}`;
 
     updateCPU();
+    startMining();
     setInterval(updateCPU, 8000);
 }
 
@@ -39,29 +41,67 @@ function updateCPU() {
     osu.cpu.usage()
         .then(e => {
             getMine().querySelector("#mine-top-usage").innerHTML = `Usage: ${Math.round(e)} <small>%</small>`;
-    });
+        });
 
     si.cpuCurrentSpeed()
         .then(e => {
-            getMine().querySelector("#mine-top-speed").innerHTML = `Speed: ${e.avg} <small>GHz</small>`;
-    });
+            getMine().querySelector("#mine-top-speed").innerHTML = `Speed: ${Math.round(e.avg)} <small>GHz</small>`;
+        });
 
     si.cpuTemperature()
         .then(e => {
             getMine().querySelector("#mine-top-cpu").innerHTML = `CPU: ${Math.round(e.main)} <small>°C</small>`;
+        });
+}
+
+function initChart() {
+    var ctx = document.getElementById('chart').getContext('2d');
+    var hashChart = new chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Chungus', 'Chungus', 'Chungus', 'Chungus', 'Chungus', 'Chungus'],
+            datasets: [{
+                label: 'Price $',
+                data: [12, 19, 3, 5, 6, 3],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
     });
 }
 
 function startMining() {
-
+    initChart();
 }
 
 function stopMining() {
-    
+
 }
 
 function settings() {
-    
+
 }
 
 function showAddrError() {
