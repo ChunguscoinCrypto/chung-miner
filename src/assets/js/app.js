@@ -1,10 +1,13 @@
 const { dialog } = require('electron').remote;
 const shell = require('electron').shell;
+const osu = require('node-os-utils');
+const si = require('systeminformation');
 const path = require('path');
+const os = require('os');
 
 window.addEventListener("load", () => {
     // Show home screen, but hide mining screen when page is loaded
-    getHome().style.display = "block";
+    getHome().style.display = "flex";
     getMine().style.display = "none";
 }, false);
 
@@ -24,16 +27,36 @@ function showMiner() {
     }
 
     getHome().style.display = "none";
-    getMine().style.display = "block";
+    getMine().style.display = "flex";
 
-    // getMine().innerHTML += `\n Welcome Chung User, ${address}!`;
+    getMine().querySelector("#mine-top-info").innerHTML = `Mining to ${address}`;
+
+    updateCPU();
+    setInterval(updateCPU, 8000);
 }
 
-function showAddrError() { 
+function updateCPU() {
+    osu.cpu.usage()
+        .then(e => {
+            getMine().querySelector("#mine-top-usage").innerHTML = `Usage: ${Math.round(e)} <small>%</small>`;
+    });
+
+    si.cpuCurrentSpeed()
+        .then(e => {
+            getMine().querySelector("#mine-top-speed").innerHTML = `Speed: ${e.avg} <small>GHz</small>`;
+    });
+
+    si.cpuTemperature()
+        .then(e => {
+            getMine().querySelector("#mine-top-cpu").innerHTML = `CPU: ${Math.round(e.main)} <small>°C</small>`;
+    });
+}
+
+function showAddrError() {
     function getWallet() { shell.openExternal("http://wallet.chunguscoin.net") };
-    dialog.showMessageBox({        
+    dialog.showMessageBox({
         type: 'info',
-        buttons: ["OK", "Get Wallet"], 
+        buttons: ["OK", "Get Wallet"],
         defaultId: 0,
         icon: 'info',
         title: 'Chung Miner',
@@ -42,9 +65,9 @@ function showAddrError() {
         noLink: true,
         normalizeAccessKeys: false,
     }).then(box => {
-        if(box.response == 1) 
+        if (box.response == 1)
             getWallet()
     }).catch(err => {
         alert(err)
-    });    
+    });
 }

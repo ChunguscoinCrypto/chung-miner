@@ -34,28 +34,41 @@
     </div>
   </div>
 
-  <div id="mine-screen">
-    <div id="mine-main">
+  <div id="mine-screen" style="display: none;">
+    <div class="mine-top">
+      <div class="mine-top uk-card uk-card-default uk-card-body">
+        <div class="uk-child-width-expand@s uk-text-center" uk-grid>
+          <div>
+            <span uk-icon="user" class="bar-icon"></span><span id="mine-top-info">Mining to ...</span>
+          </div>
+          <div>
+            <span uk-icon="bolt" class="bar-icon"></span><span id="mine-top-cpu">CPU: 0 <small>°C</small></span>
+            <span uk-icon="pull" class="bar-icon"></span><span id="mine-top-usage">Usage: 0 <small>%</small></span>
+            <span uk-icon="cog" class="bar-icon"></span><span id="mine-top-speed">Speed: 0 <small>GHz</small></span>
+          </div>
+        </div>
+      </div>
+    </div>
 
-      <div class="uk-card uk-card-default uk-card-body">
+    <div class="mine-chart">
+    </div>
+
+    <div class="mine-buttom">
+      <div class="mine-buttom uk-card uk-card-default uk-card-body">
+
         <div class="uk-child-width-1-2" uk-grid>
           <div>
-            <div class="uk-card uk-card-default uk-card-body">Item</div>
+            <span>0.00 sol/s</span>
           </div>
           <div>
             <div class="uk-child-width-1-2" uk-grid>
               <div>
-                <div class="uk-card uk-card-primary uk-card-body">Item</div>
-              </div>
-              <div>
-                <div class="uk-card uk-card-primary uk-card-body">Item</div>
+                <div class="uk-card uk-card-default uk-card-body">Chung Miner 2021</div>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="uk-card uk-card-default uk-card-body">
         <div class="uk-child-width-expand@s" uk-grid>
           <div>
             <div class="uk-card uk-card-default uk-card-body">Item</div>
