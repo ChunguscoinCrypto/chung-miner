@@ -52,6 +52,18 @@ function updateCPU() {
     });
 }
 
+function startMining() {
+
+}
+
+function stopMining() {
+    
+}
+
+function settings() {
+    
+}
+
 function showAddrError() {
     function getWallet() { shell.openExternal("http://wallet.chunguscoin.net") };
     dialog.showMessageBox({

@@ -15,6 +15,11 @@ body {
   margin-right: 2px !important;
 }
 
+.btn-icon {
+  margin-left: 4px !important;
+  margin-right: 4px !important;
+}
+
 .rotate {
   animation: rotation 6s infinite linear;
 }
