@@ -28,6 +28,15 @@ body {
   }
 }
 
+code {
+  background-color: #eee;
+  color: darkgray !important;
+  border: 0;
+  display: block;
+  padding: 8px;
+  border-radius: 10px;
+}
+
 #home-screen {
   position: absolute;
   left: 50%;
