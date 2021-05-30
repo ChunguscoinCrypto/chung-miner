@@ -39,7 +39,7 @@ code {
   border-radius: 10px;
 }
 
-#home-screen {
+.center {
   position: absolute;
   left: 50%;
   top: 50%;
@@ -61,8 +61,6 @@ code {
 
 .mine-chart {
   position: relative;
-  margin: auto;
-  width: 50vh;
   height: 100%;
   margin-top: 100px;
 }
