@@ -4,7 +4,7 @@ body {
   padding: 0;
   height: 100%;
   width: 100%;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .bar-icon {
@@ -63,12 +63,8 @@ code {
   position: relative;
   margin: auto;
   width: 50vh;
-  height: 580px;
-  margin-top: 120px;
-}
-
-#chart {
-  /* height: 580px !important; */
+  height: 100%;
+  margin-top: 100px;
 }
 
 .mine-buttom {
