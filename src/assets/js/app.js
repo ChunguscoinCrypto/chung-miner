@@ -2,7 +2,6 @@ const { dialog } = require('electron').remote;
 const shell = require('electron').shell;
 const osu = require('node-os-utils');
 const si = require('systeminformation');
-const chart = require('chart.js');
 const path = require('path');
 const os = require('os');
 
@@ -60,6 +59,8 @@ function getPoolStats() {
         .then(response => response.json())
         .then(data => {
             console.log(data);
+            pool = data.pools.chung.poolStats;
+            
         })
         .catch(console.error);
 }

@@ -21,9 +21,15 @@
     "forge": {
       "packagerConfig": {},
       "make_targets": {
-        "win32": ["squirrel"],
-        "darwin": ["zip"],
-        "linux": ["zip"]
+        "win32": [
+          "squirrel"
+        ],
+        "darwin": [
+          "zip"
+        ],
+        "linux": [
+          "zip"
+        ]
       },
       "github_repository": {
         "owner": "ChunguscoinCrypto",
