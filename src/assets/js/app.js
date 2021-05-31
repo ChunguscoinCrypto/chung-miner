@@ -35,6 +35,7 @@ function showMiner() {
     startMining();
     getPoolStats();
     setInterval(updateCPU, 8000);
+    setInterval(getPoolStats, 20000);
 }
 
 function updateCPU() {
@@ -60,7 +61,9 @@ function getPoolStats() {
         .then(data => {
             console.log(data);
             pool = data.pools.chung.poolStats;
-            
+            getMine().querySelector("#mine-pool-blocks").innerHTML = `Blocks: ${pool.networkBlocks}`;
+            getMine().querySelector("#mine-pool-paid").innerHTML = `Paid: ${pool.totalPaid}`;
+            getMine().querySelector("#mine-pool-hash").innerHTML = `Hash: ${pool.networkSols} <small>sol/s</small>`;
         })
         .catch(console.error);
 }
