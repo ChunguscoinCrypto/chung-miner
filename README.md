@@ -13,7 +13,7 @@ pacman -S npm
 # Build
 ```
 npm install
-npm build
+npm make
 ```
 
 # Run

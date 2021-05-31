@@ -69,6 +69,7 @@ function getPoolStats() {
 }
 
 function startMining() {
+    
 }
 
 function stopMining() {
@@ -76,7 +77,7 @@ function stopMining() {
 }
 
 function settings() {
-
+    shell.openExternal("https://pool.chunguscoin.net/");
 }
 
 function showAddrError() {
