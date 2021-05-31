@@ -20,6 +20,27 @@
   "config": {
     "forge": {
       "packagerConfig": {},
+      "make_targets": {
+        "win32": ["squirrel"],
+        "darwin": ["zip"],
+        "linux": ["zip"]
+      },
+      "github_repository": {
+        "owner": "ChunguscoinCrypto",
+        "name": "chung-miner"
+      },
+      "publishers": [
+        {
+          "name": "@electron-forge/publisher-github",
+          "config": {
+            "repository": {
+              "owner": "ChunguscoinCrypto",
+              "name": "chung-miner"
+            },
+            "prerelease": true
+          }
+        }
+      ]
       "makers": [
         {
           "name": "@electron-forge/maker-squirrel",
@@ -30,16 +51,9 @@
         {
           "name": "@electron-forge/maker-zip",
           "platforms": [
-            "darwin"
+            "darwin",
+            "linux"
           ]
-        },
-        {
-          "name": "@electron-forge/maker-deb",
-          "config": {}
-        },
-        {
-          "name": "@electron-forge/maker-rpm",
-          "config": {}
         }
       ]
     }

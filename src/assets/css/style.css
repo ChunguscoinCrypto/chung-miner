@@ -8,13 +8,17 @@ body {
 }
 
 .bar-icon {
-  margin-left: 2px !important;
-  margin-right: 2px !important;
+  margin-left: 4px !important;
+  margin-right: 4px !important;
 }
 
 .btn-icon {
   margin-left: 4px !important;
   margin-right: 4px !important;
+}
+
+#mine-top-info {
+  font-size: 12px;
 }
 
 .rotate {
@@ -60,9 +64,8 @@ code {
 }
 
 .mine-chart {
-  position: relative;
-  height: 100%;
-  margin-top: 100px;
+  z-index: -1;
+  margin-top: -55px;
 }
 
 .mine-buttom {

@@ -56,7 +56,12 @@ function updateCPU() {
 }
 
 function getPoolStats() {
-
+    fetch("https://pool.chunguscoin.net/api/stats")
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+        })
+        .catch(console.error);
 }
 
 function startMining() {
