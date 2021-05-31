@@ -1,4 +1,5 @@
 const { dialog } = require('electron').remote;
+const { exec } = require('child_process');
 const shell = require('electron').shell;
 const osu = require('node-os-utils');
 const si = require('systeminformation');
@@ -59,7 +60,6 @@ function getPoolStats() {
     fetch("https://pool.chunguscoin.net/api/stats")
         .then(response => response.json())
         .then(data => {
-            console.log(data);
             pool = data.pools.chung.poolStats;
             getMine().querySelector("#mine-pool-blocks").innerHTML = `Blocks: ${pool.networkBlocks}`;
             getMine().querySelector("#mine-pool-paid").innerHTML = `Paid: ${pool.totalPaid}`;
@@ -69,11 +69,69 @@ function getPoolStats() {
 }
 
 function startMining() {
-    
+    if (os.platform() == "linux") {
+
+        const child = exec('./src/assets/bin/linux/chungusminer');
+        child.stdout.on('data', (data) => {
+            alert(`stdout: ${data}`)
+        });
+
+        child.stderr.on('data', (data) => {
+            alert(`stderr: ${data}`)
+        });
+        child.on('close', (code) => console.log(`child process exited with code ${code}`));
+
+    } else if (os.platform() == "darwin") {
+
+        const child = exec('./src/assets/bin/mac/chungusminer');
+        child.stdout.on('data', (data) => {
+            alert(`stdout: ${data}`)
+        });
+
+        child.stderr.on('data', (data) => {
+            alert(`stderr: ${data}`)
+        });
+        child.on('close', (code) => console.log(`child process exited with code ${code}`));
+
+    } else if (os.platform() == "win32") {
+
+        const child = exec('./src/assets/bin/win/chungusminer.exe');
+        child.stdout.on('data', (data) => {
+            alert(`stdout: ${data}`)
+        });
+
+        child.stderr.on('data', (data) => {
+            alert(`stderr: ${data}`)
+        });
+        child.on('close', (code) => console.log(`child process exited with code ${code}`));
+    }
 }
 
 function stopMining() {
+    if (os.platform() == "linux" || os.platform() == "darwin") {
 
+        const child = exec('killall chungusminer');
+        child.stdout.on('data', (data) => {
+            alert(`stdout: ${data}`)
+        });
+
+        child.stderr.on('data', (data) => {
+            alert(`stderr: ${data}`)
+        });
+        child.on('close', (code) => console.log(`child process exited with code ${code}`));
+
+    } else if (os.platform() == "win32") {
+
+        const child = exec('taskkill.exe /F /IM chungusminer.exe');
+        child.stdout.on('data', (data) => {
+            alert(`stdout: ${data}`)
+        });
+
+        child.stderr.on('data', (data) => {
+            alert(`stderr: ${data}`)
+        });
+        child.on('close', (code) => console.log(`child process exited with code ${code}`));
+    }
 }
 
 function settings() {
