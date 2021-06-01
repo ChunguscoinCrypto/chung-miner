@@ -99,7 +99,6 @@ function startMining(addr) {
         var data = cleanOutput(e);
         if (data.includes("/s")) { // (Sol/s)
             var hash = data.replace(": ", "").replace(/\d+((.|,)\d+)?/, "").replace("H/s,", "").replace("Sol/s", "").replace("[0m", "").trim(); // extract hasrate
-            alert(hash);
             getMine().querySelector("#hashrate").innerHTML = `<span uk-icon="icon: cog; ratio: 2" class="rotate"></span>` + ` ${hash} sol/s `;
         }
         console.log(`stderr: ${data}`);
