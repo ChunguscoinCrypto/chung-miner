@@ -24,7 +24,7 @@ function getMine() {
 
 function showMiner() {
     window.addr = document.getElementById('chung-address').value;
-    if (address.length == 0) {
+    if (window.addr.length == 0) {
         showAddrError();
         return;
     }
