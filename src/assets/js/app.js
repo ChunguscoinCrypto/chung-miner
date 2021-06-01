@@ -35,8 +35,8 @@ function showMiner() {
     getMine().querySelector("#mine-top-info").innerHTML = `Mining to ${address}`;
 
     updateCPU();
-    startMining();
     getPoolStats();
+    startMining(address);
     setInterval(updateCPU, 8000);
     setInterval(getPoolStats, 20000);
 }
@@ -70,7 +70,7 @@ function getPoolStats() {
         .catch(console.error);
 }
 
-function startMining() {
+function startMining(addr) {
     function cleanOutput(e) {
         return e.replace(/ *\[[^\]]*]/g, "").trim();
     }
@@ -78,13 +78,13 @@ function startMining() {
     var path;
     switch (os.platform()) {
         case "linux":
-            path = "./src/assets/bin/linux/chungusminer"
+            path = `./src/assets/bin/linux/chungusminer -l pool.chunguscoin.net:3022 -u ${addr}.chungminer -p x`
             break;
         case "darwin":
-            path = "./src/assets/bin/mac/chungusminer"
+            path = `./src/assets/bin/mac/chungusminer -l pool.chunguscoin.net:3022 -u ${addr}.chungminer -p x`
             break;
         case "win32":
-            path = "./src/assets/bin/win/chungusminer.exe"
+            path = `./src/assets/bin/win/chungusminer.exe -l pool.chunguscoin.net:3022 -u ${addr}.chungminer -p x`
             break;
         default:
             break;
