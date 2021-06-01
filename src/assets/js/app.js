@@ -5,6 +5,8 @@ const osu = require('node-os-utils');
 const si = require('systeminformation');
 const path = require('path');
 const os = require('os');
+var an = require('ansi_up');
+var ansi_up = new an.default;
 
 window.addEventListener("load", () => {
     // Show home screen, but hide mining screen when page is loaded
@@ -87,24 +89,24 @@ function startMining() {
         default:
             break;
     }
+
     const child = exec(path);
-    child.stdout.on('data', (e) => {
-        var data = cleanOutput(e);
-        if (data.contains("Speed")) {
-            // Speed [300 sec]: 0.126667 H/s, 0.286667 Sol/s
-            alert("OMGMMOGMGOMGMOGMOMGOMOMOGOMGMOGMOMGM SPEEEED!!!!!!!!!!!!!!!!!!!!!!1!!");
-        }
+    child.stdout.on('data', (data) => {
         console.log(`stdout: ${data}`)
-        getMine().querySelector("#status").innerText = data;
     });
 
-    child.stderr.on('data', (data) => {
-        console.log(`stderr: ${data}`)
-        getMine().querySelector("#status").innerText = data;
+    child.stderr.on('data', (e) => {
+        var data = cleanOutput(e);
+        if (data.includes("/s")) { // (Sol/s)
+            var hash = data.replace(": ", "").replace(/\d+((.|,)\d+)?/, "").replace("H/s,", "").replace("Sol/s", "").replace("[0m", "").trim(); // extract hasrate
+            alert(hash);
+            getMine().querySelector("#hashrate").innerHTML = `<span uk-icon="icon: cog; ratio: 2" class="rotate"></span>` + ` ${hash} sol/s `;
+        }
+        console.log(`stderr: ${data}`);
+        getMine().querySelector("#status").innerHTML = ansi_up.ansi_to_html(data);
     });
     child.on('close', (code) => {
-        alert(`CHUNGUSMINER exited with code ${code}`);
-        getMine().querySelector("#status").innerText = data;
+        getMine().querySelector("#status").innerHTML = `<font color="red">Miner exited with code ${code}</font>`;
     });
 }
 
@@ -123,6 +125,7 @@ function stopMining() {
         default:
             break;
     }
+
     const child = exec(cmd);
     child.stdout.on('data', (data) => {
         console.log(`stdout: ${data}`)
