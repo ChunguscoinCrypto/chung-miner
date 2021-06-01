@@ -69,6 +69,10 @@ function getPoolStats() {
 }
 
 function startMining() {
+    function cleanOutput(e) {
+        return e.replace(/ *\[[^\]]*]/g, "").trim();
+    }
+
     var path;
     switch (os.platform()) {
         case "linux":
@@ -84,10 +88,11 @@ function startMining() {
             break;
     }
     const child = exec(path);
-    child.stdout.on('data', (data) => {
+    child.stdout.on('data', (e) => {
+        var data = cleanOutput(e);
         if (data.contains("Speed")) {
             // Speed [300 sec]: 0.126667 H/s, 0.286667 Sol/s
-
+            alert("OMGMMOGMGOMGMOGMOMGOMOMOGOMGMOGMOMGM SPEEEED!!!!!!!!!!!!!!!!!!!!!!1!!");
         }
         console.log(`stdout: ${data}`)
         getMine().querySelector("#status").innerText = data;
@@ -98,7 +103,7 @@ function startMining() {
         getMine().querySelector("#status").innerText = data;
     });
     child.on('close', (code) => {
-        alert(`child process exited with code ${code}`);
+        alert(`CHUNGUSMINER exited with code ${code}`);
         getMine().querySelector("#status").innerText = data;
     });
 }
@@ -126,7 +131,7 @@ function stopMining() {
     child.stderr.on('data', (data) => {
         console.log(`stderr: ${data}`)
     });
-    child.on('close', (code) => alert(`child process exited with code ${code}`));
+    child.on('close', (code) => alert(`KILLER exited with code ${code}`));
 }
 
 function settings() {

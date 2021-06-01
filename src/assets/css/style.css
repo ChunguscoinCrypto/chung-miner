@@ -55,6 +55,13 @@ code {
   transform: translate(-50%, -50%);
 }
 
+#status {
+  font-size: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 #mine-screen {
   height: 100%;
   width: 100%;
