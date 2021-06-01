@@ -69,69 +69,64 @@ function getPoolStats() {
 }
 
 function startMining() {
-    if (os.platform() == "linux") {
-
-        const child = exec('./src/assets/bin/linux/chungusminer');
-        child.stdout.on('data', (data) => {
-            alert(`stdout: ${data}`)
-        });
-
-        child.stderr.on('data', (data) => {
-            alert(`stderr: ${data}`)
-        });
-        child.on('close', (code) => console.log(`child process exited with code ${code}`));
-
-    } else if (os.platform() == "darwin") {
-
-        const child = exec('./src/assets/bin/mac/chungusminer');
-        child.stdout.on('data', (data) => {
-            alert(`stdout: ${data}`)
-        });
-
-        child.stderr.on('data', (data) => {
-            alert(`stderr: ${data}`)
-        });
-        child.on('close', (code) => console.log(`child process exited with code ${code}`));
-
-    } else if (os.platform() == "win32") {
-
-        const child = exec('./src/assets/bin/win/chungusminer.exe');
-        child.stdout.on('data', (data) => {
-            alert(`stdout: ${data}`)
-        });
-
-        child.stderr.on('data', (data) => {
-            alert(`stderr: ${data}`)
-        });
-        child.on('close', (code) => console.log(`child process exited with code ${code}`));
+    var path;
+    switch (os.platform()) {
+        case "linux":
+            path = "./src/assets/bin/linux/chungusminer"
+            break;
+        case "darwin":
+            path = "./src/assets/bin/mac/chungusminer"
+            break;
+        case "win32":
+            path = "./src/assets/bin/win/chungusminer.exe"
+            break;
+        default:
+            break;
     }
+    const child = exec(path);
+    child.stdout.on('data', (data) => {
+        if (data.contains("Speed")) {
+            // Speed [300 sec]: 0.126667 H/s, 0.286667 Sol/s
+
+        }
+        console.log(`stdout: ${data}`)
+        getMine().querySelector("#status").innerText = data;
+    });
+
+    child.stderr.on('data', (data) => {
+        console.log(`stderr: ${data}`)
+        getMine().querySelector("#status").innerText = data;
+    });
+    child.on('close', (code) => {
+        alert(`child process exited with code ${code}`);
+        getMine().querySelector("#status").innerText = data;
+    });
 }
 
 function stopMining() {
-    if (os.platform() == "linux" || os.platform() == "darwin") {
-
-        const child = exec('killall chungusminer');
-        child.stdout.on('data', (data) => {
-            alert(`stdout: ${data}`)
-        });
-
-        child.stderr.on('data', (data) => {
-            alert(`stderr: ${data}`)
-        });
-        child.on('close', (code) => console.log(`child process exited with code ${code}`));
-
-    } else if (os.platform() == "win32") {
-
-        const child = exec('taskkill.exe /F /IM chungusminer.exe');
-        child.stdout.on('data', (data) => {
-            alert(`stdout: ${data}`)
-        });
-
-        child.stderr.on('data', (data) => {
-            alert(`stderr: ${data}`)
-        });
-        child.on('close', (code) => console.log(`child process exited with code ${code}`));
+    var cmd;
+    switch (os.platform()) {
+        case "linux":
+            cmd = "killall chungusminer"
+            break;
+        case "darwin":
+            cmd = "killall chungusminer"
+            break;
+        case "win32":
+            cmd = "taskkill.exe /F /IM chungusminer.exe"
+            break;
+        default:
+            break;
     }
+    const child = exec(cmd);
+    child.stdout.on('data', (data) => {
+        console.log(`stdout: ${data}`)
+    });
+
+    child.stderr.on('data', (data) => {
+        console.log(`stderr: ${data}`)
+    });
+    child.on('close', (code) => alert(`child process exited with code ${code}`));
 }
 
 function settings() {
