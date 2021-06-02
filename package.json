@@ -8,6 +8,9 @@
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
+    "make-mac": "electron-forge make --platform darwin",
+    "make-win": "electron-forge make --platform win32",
+    "make-linux": "electron-forge make --platform linux",
     "publish": "electron-forge publish",
     "lint": "echo \"No linting configured\""
   },
@@ -20,7 +23,7 @@
   "config": {
     "forge": {
       "packagerConfig": {
-        "icon": "./src/assets/icons/mac/icon.icns"
+        "icon": "./src/assets/icons/win/icon.ico"
       },
       "make_targets": {
         "win32": [
@@ -54,7 +57,7 @@
         {
           "name": "@electron-forge/maker-squirrel",
           "config": {
-            "name": "Chung Miner"
+            "name": "chung-miner"
           }
         },
         {
