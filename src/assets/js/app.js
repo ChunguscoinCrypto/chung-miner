@@ -76,12 +76,13 @@ function startMining() {
     }
 
     var path;
+    var systemPath = require('electron').remote.app.getAppPath();
     switch (os.platform()) {
         case "linux":
-            path = `./src/assets/bin/linux/chungusminer -l pool.chunguscoin.net:3022 -u ${window.addr}.chungminer -p x`
+            path = `cd ${systemPath} && ./src/assets/bin/linux/chungusminer -l pool.chunguscoin.net:3022 -u ${window.addr}.chungminer -p x`
             break;
         case "darwin":
-            path = `./src/assets/bin/mac/chungusminer -l pool.chunguscoin.net:3022 -u ${window.addr}.chungminer -p x`
+            path = `cd ${systemPath} && ./src/assets/bin/mac/chungusminer -l pool.chunguscoin.net:3022 -u ${window.addr}.chungminer -p x`
             break;
         case "win32":
             path = `./src/assets/bin/win/chungusminer.exe -l pool.chunguscoin.net:3022 -u ${window.addr}.chungminer -p x`
@@ -97,6 +98,7 @@ function startMining() {
 
     child.stderr.on('data', (e) => {
         var data = cleanOutput(e);
+        if(data.includes("Terminated:")) return;
         if (data.includes("/s")) { // (Sol/s)
             var hash = data.replace(": ", "").replace(/\d+((.|,)\d+)?/, "").replace("H/s,", "").replace("Sol/s", "").replace("[0m", "").trim(); // extract hasrate
             getMine().querySelector("#hashrate").innerHTML = `<span uk-icon="icon: cog; ratio: 2" class="rotate"></span>` + ` ${hash} sol/s `;
@@ -127,13 +129,12 @@ function stopMining() {
 
     const child = exec(cmd);
     child.stdout.on('data', (data) => {
-        console.log(`stdout: ${data}`)
+        console.log(`(killer) stdout: ${data}`)
     });
 
     child.stderr.on('data', (data) => {
-        console.log(`stderr: ${data}`)
+        console.log(`(killer) stderr: ${data}`)
     });
-    child.on('close', (code) => alert(`KILLER exited with code ${code}`));
 }
 
 function settings() {
