@@ -85,7 +85,7 @@ function startMining() {
             path = `cd ${systemPath} && ./src/assets/bin/mac/chungusminer -l pool.chunguscoin.net:3022 -u ${window.addr}.chungminer -p x`
             break;
         case "win32":
-            path = `./src/assets/bin/win/chungusminer.exe -l pool.chunguscoin.net:3022 -u ${window.addr}.chungminer -p x`
+            path = `cd ${systemPath} && start/src/assets/bin/win/chungusminer.exe -l pool.chunguscoin.net:3022 -u ${window.addr}.chungminer -p x`
             break;
         default:
             break;
