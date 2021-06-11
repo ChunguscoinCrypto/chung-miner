@@ -1,18 +1,21 @@
 # Chunguscoin Miner
 
-This is a work in progress GUI miner written in Javascript.
+This is a easy to use GUI miner for people wanting to mine Chunguscoin.
 
-Right now you can use `npm` to build and run the app. `Node.js` is needed to compile app.
+You can use `npm` to compile the app. [Nodejs](https://nodejs.org/en/) is needed to compile the app.
 
 # Build
-```
+```shell
+git clone https://github.com/ChunguscoinCrypto/chung-miner
 npm install
-npm make
+npm run make
 ```
 
 # Run
-```
-npm run
+```shell
+git clone https://github.com/ChunguscoinCrypto/chung-miner
+npm install
+npm start
 ```
 
 Created by Shafil Alam
